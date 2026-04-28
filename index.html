@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APEG • Pixel Ape Memecoin | MegaETH on Kumbaya</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&amp;display=swap');
+        
+        :root {
+            --orange: #ff6b00;
+        }
+        
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+        
+        .pixel-font {
+            font-family: "Press Start 2P", system-ui;
+            image-rendering: pixelated;
+        }
+
+        .neon-orange {
+            text-shadow: 0 0 10px #ff6b00, 0 0 20px #ff6b00;
+        }
+
+        .section-header {
+            font-size: 2.5rem;
+            line-height: 1.1;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+
+        .meme-card {
+            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .meme-card:hover {
+            transform: translateY(-8px) rotate(1deg);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+
+        .pixel-border {
+            image-rendering: pixelated;
+            border: 4px solid #ff6b00;
+            box-shadow: 0 0 0 4px #1a1a1a;
+        }
+
+        .ape-bg {
+            background-image: 
+                linear-gradient(rgba(10, 10, 10, 0.85), rgba(10, 10, 10, 0.85)),
+                url('data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27100%27 height=%27100%27 fill=%27none%27%3E%3Cpath d=%27M0 0h100v100H0V0zm50 10l40 40-40 40-40-40 40-40z%27 fill=%27%23ff6b0033%27/%3E%3C/svg%27');
+            background-size: 60px 60px;
+        }
+
+        .nav-link {
+            transition: color 0.2s ease;
+        }
+        
+        .nav-link:hover {
+            color: #ff6b00;
+        }
+
+        .stat-number {
+            font-variant-numeric: tabular-nums;
+        }
+
+        .timeline-item {
+            position: relative;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 31px;
+            top: 0;
+            bottom: -24px;
+            width: 3px;
+            background: linear-gradient(to bottom, #ff6b00, #ff6b0033);
+        }
+        
+        .timeline-item:last-child::before {
+            display: none;
+        }
+
+        .glow-orange {
+            box-shadow: 0 0 15px rgba(255, 107, 0, 0.5),
+                        0 0 30px rgba(255, 107, 0, 0.3);
+        }
+
+        .pixel-art {
+            image-rendering: crisp-edges;
+            image-rendering: pixelated;
+        }
+
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .retro-grid {
+            background-image: 
+                linear-gradient(#ff6b0011 1px, transparent 1px),
+                linear-gradient(90deg, #ff6b0011 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+    </style>
+</head>
+<body class="bg-zinc-950 text-white overflow-x-hidden">
+    <!-- NAV -->
+    <nav class="sticky top-0 z-50 bg-zinc-950/90 backdrop-blur-lg border-b border-zinc-800">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-x-3">
+                <!-- Logo -->
+                <div class="flex items-center gap-x-3">
+                    <img src="https://i.imgur.com/ENrVyaP.jpg" alt="APEG Logo" class="w-12 h-12 rounded-xl pixel-art ring-2 ring-orange-500/50">
+                    <div>
+                        <span class="pixel-font text-3xl font-black tracking-tighter">APEG</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Desktop Nav -->
+            <div class="hidden md:flex items-center gap-x-9 text-sm font-medium">
+                <a href="#about" class="nav-link">The Story</a>
+                <a href="#tokenomics" class="nav-link">Tokenomics</a>
+                <a href="#roadmap" class="nav-link">Roadmap</a>
+                <a href="#buy" class="nav-link">How to Ape</a>
+            </div>
+
+            <div class="flex items-center gap-x-4">
+                <!-- Social -->
+                <a href="https://x.com/apegmascot" target="_blank" 
+                   class="flex items-center justify-center w-10 h-10 hover:bg-zinc-900 rounded-2xl transition-colors">
+                    <i class="fa-brands fa-x-twitter text-xl"></i>
+                </a>
+                
+                <!-- Mobile Menu -->
+                <button class="md:hidden w-10 h-10 flex items-center justify-center" onclick="toggleMobileMenu()">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-zinc-800 bg-zinc-950 px-6 py-6">
+            <div class="flex flex-col gap-y-4 text-sm font-medium">
+                <a href="#about" class="py-2 nav-link">The Story</a>
+                <a href="#tokenomics" class="py-2 nav-link">Tokenomics</a>
+                <a href="#roadmap" class="py-2 nav-link">Roadmap</a>
+                <a href="#buy" class="py-2 nav-link">How to Ape</a>
+                <div class="pt-4 border-t border-zinc-800">
+                    <a href="https://x.com/apegmascot" target="_blank" class="flex items-center gap-x-2 py-2">
+                        <i class="fa-brands fa-x-twitter"></i> 
+                        <span>@apegmascot</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <header class="relative min-h-[100dvh] flex items-center justify-center retro-grid pt-12">
+        <div class="max-w-5xl mx-auto px-6 text-center relative z-10">
+            <!-- Floating Logo -->
+            <div class="mb-8 flex justify-center">
+                <div class="relative">
+                    <img src="https://i.imgur.com/qZs2uex.jpg" alt="APEG Pixel Gorilla" 
+                         class="w-72 h-72 md:w-96 md:h-96 object-contain pixel-art floating drop-shadow-[0_0_60px_rgb(255,107,0)]">
+                    <!-- Glow ring -->
+                    <div class="absolute inset-0 rounded-full border-[12px] border-orange-500/30 animate-pulse"></div>
+                </div>
+            </div>
+
+            <div class="max-w-3xl mx-auto">
+                <div class="inline-flex items-center gap-x-2 bg-zinc-900 border border-orange-500/30 px-4 py-1 rounded-3xl mb-4">
+                    <div class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
+                    <span class="text-emerald-400 text-xs font-mono tracking-[2px]">LIVE ON MEGAETH</span>
+                </div>
+                
+                <h1 class="text-7xl md:text-8xl font-black tracking-tighter mb-4 pixel-font">
+                    APEG
+                </h1>
+                
+                <p class="text-3xl md:text-4xl font-bold text-orange-400 mb-6 tracking-tight">
+                    THE PIXEL APE<br>IS HERE TO RAGE
+                </p>
+                
+                <p class="max-w-md mx-auto text-xl text-zinc-400 mb-10">
+                    Fair launch memecoin on the world's fastest chain.<br>
+                    Powered by <span class="font-semibold text-white">MegaETH</span> • Launched on <span class="font-semibold text-orange-400">Kumbaya</span>
+                </p>
+
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a href="https://kumbaya.xyz" target="_blank"
+                       class="group w-full sm:w-auto px-10 py-4 bg-orange-500 hover:bg-orange-600 text-white font-bold text-lg rounded-3xl flex items-center justify-center gap-x-3 transition-all active:scale-[0.985] shadow-xl shadow-orange-500/30">
+                        <span>🦍 APE IN ON KUMBAYA</span>
+                        <i class="fa-solid fa-arrow-right group-active:translate-x-1 transition"></i>
+                    </a>
+                    
+                    <a href="https://x.com/apegmascot" target="_blank"
+                       class="w-full sm:w-auto px-8 py-4 border border-zinc-700 hover:bg-zinc-900 font-bold text-lg rounded-3xl flex items-center justify-center gap-x-3 transition-all">
+                        <i class="fa-brands fa-x-twitter text-xl"></i>
+                        <span>JOIN THE CULT</span>
+                    </a>
+                </div>
+                
+                <div class="mt-8 text-xs text-zinc-500 flex items-center justify-center gap-x-2">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <span>100% Fair • 0% Tax • LP Burned</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center text-xs tracking-widest text-zinc-500">
+            <span>SCROLL TO APE</span>
+            <i class="fa-solid fa-chevron-down mt-1 animate-bounce"></i>
+        </div>
+    </header>
+
+    <!-- STATS BAR -->
+    <div class="border-y border-zinc-800 bg-zinc-900/50">
+        <div class="max-w-7xl mx-auto px-6 py-5 grid grid-cols-2 md:grid-cols-4 gap-px bg-zinc-800">
+            <div class="bg-zinc-950 px-6 py-4 text-center">
+                <div class="text-3xl font-black text-orange-400">1,000,000,000</div>
+                <div class="text-xs text-zinc-400 tracking-wider">TOTAL SUPPLY</div>
+            </div>
+            <div class="bg-zinc-950 px-6 py-4 text-center">
+                <div class="text-3xl font-black text-emerald-400">0%</div>
+                <div class="text-xs text-zinc-400 tracking-wider">BUY / SELL TAX</div>
+            </div>
+            <div class="bg-zinc-950 px-6 py-4 text-center">
+                <div class="text-3xl font-black">100%</div>
+                <div class="text-xs text-zinc-400 tracking-wider">LIQUIDITY ON KUMBAYA</div>
+            </div>
+            <div class="bg-zinc-950 px-6 py-4 text-center">
+                <div class="text-3xl font-black text-orange-400">∞</div>
+                <div class="text-xs text-zinc-400 tracking-wider">MEME POTENTIAL</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ABOUT / THE STORY -->
+    <section id="about" class="max-w-5xl mx-auto px-6 py-24">
+        <div class="grid md:grid-cols-12 gap-x-8 items-center">
+            <div class="md:col-span-7">
+                <div class="uppercase tracking-[3px] text-xs font-mono text-orange-400 mb-3">CHAPTER 01 • THE ORIGIN</div>
+                <h2 class="section-header mb-8">The Pixel Gorilla<br>That Broke the Chain</h2>
+                
+                <div class="prose prose-invert text-lg text-zinc-300 max-w-prose">
+                    <p class="mb-6">Deep in the MegaETH jungle, where transactions settle in <span class="font-semibold text-white">sub-milliseconds</span>, a new legend was born.</p>
+                    
+                    <p class="mb-6">Meet <span class="font-bold text-orange-400">APEG</span> — the angriest, pixelated, chain-smoking gorilla to ever ape into a memecoin.</p>
+                    
+                    <p>He doesn't care about fundamentals. He doesn't care about your FUD. He only cares about one thing:</p>
+                    
+                    <div class="my-8 pl-6 border-l-4 border-orange-500 text-2xl font-bold text-white">
+                        "GOING ABSOLUTELY BANANAS ON THE FASTEST CHAIN IN CRYPTO."
+                    </div>
+                    
+                    <p>This is more than a token. This is a <span class="font-semibold">cult</span>. A movement of degens who understand that on MegaETH, speed isn't just a feature — it's the entire game.</p>
+                </div>
+            </div>
+            
+            <div class="md:col-span-5 mt-12 md:mt-0">
+                <div class="relative">
+                    <img src="https://i.imgur.com/vMkpPwG.jpg" alt="APEG Mascot Closeup" 
+                         class="w-full max-w-[380px] mx-auto pixel-art rounded-3xl border-8 border-zinc-800 shadow-2xl">
+                    <div class="absolute -bottom-4 -right-4 bg-zinc-900 border border-orange-500 text-xs px-4 py-1 rounded-2xl flex items-center gap-x-2">
+                        <div class="w-px h-3 bg-orange-500"></div>
+                        <span class="font-mono">MASCOT VERIFIED</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TOKENOMICS -->
+    <section id="tokenomics" class="bg-zinc-900 py-20 border-y border-zinc-800">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <div class="uppercase tracking-[3px] text-xs font-mono text-orange-400 mb-3">CHAPTER 02 • THE NUMBERS</div>
+                <h2 class="section-header">Tokenomics That<br>Make Degens Smile</h2>
+                <p class="mt-4 text-xl text-zinc-400">Simple. Fair. Built for speed.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Left: Allocation -->
+                <div class="bg-zinc-950 border border-zinc-800 rounded-3xl p-8">
+                    <h3 class="font-bold text-xl mb-6 flex items-center gap-x-3">
+                        <i class="fa-solid fa-chart-pie text-orange-400"></i> 
+                        ALLOCATION
+                    </h3>
+                    
+                    <div class="space-y-5">
+                        <div>
+                            <div class="flex justify-between text-sm mb-1.5">
+                                <span class="font-medium">Community &amp; Liquidity</span>
+                                <span class="font-mono text-emerald-400">100%</span>
+                            </div>
+                            <div class="h-3 bg-zinc-800 rounded-full overflow-hidden">
+                                <div class="h-full w-full bg-gradient-to-r from-orange-400 to-emerald-400 rounded-full"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="pt-4 border-t border-zinc-800 text-xs text-zinc-400 space-y-2">
+                            <div class="flex justify-between">
+                                <span>• 100% Liquidity Pool on Kumbaya</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>• LP Tokens Burned (post-launch)</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>• Contract Ownership Renounced</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>• No team allocation. No presale. No rugs.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right: Key Facts -->
+                <div class="bg-zinc-950 border border-zinc-800 rounded-3xl p-8 flex flex-col">
+                    <h3 class="font-bold text-xl mb-6 flex items-center gap-x-3">
+                        <i class="fa-solid fa-file-contract text-orange-400"></i> 
+                        KEY FACTS
+                    </h3>
+                    
+                    <div class="flex-1 space-y-6 text-sm">
+                        <div class="flex gap-x-4">
+                            <div class="w-9 h-9 rounded-2xl bg-orange-500/10 flex-shrink-0 flex items-center justify-center">
+                                <i class="fa-solid fa-globe text-orange-400"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold">Chain</div>
+                                <div class="text-zinc-400">MegaETH (Real-time L2)</div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex gap-x-4">
+                            <div class="w-9 h-9 rounded-2xl bg-orange-500/10 flex-shrink-0 flex items-center justify-center">
+                                <i class="fa-solid fa-rocket text-orange-400"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold">Launch Platform</div>
+                                <div class="text-zinc-400">Kumbaya.xyz — The #1 DEX &amp; Launchpad on MegaETH</div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex gap-x-4">
+                            <div class="w-9 h-9 rounded-2xl bg-orange-500/10 flex-shrink-0 flex items-center justify-center">
+                                <i class="fa-solid fa-link text-orange-400"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold">Contract Address</div>
+                                <div class="font-mono text-xs text-orange-400 break-all">0xAPEG... (Deploying live on launch)</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-auto pt-6 border-t border-zinc-800 text-[10px] text-zinc-500 font-mono">
+                        TAX: 0% BUY • 0% SELL • FOREVER
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-8 text-center">
+                <div class="inline-flex items-center gap-x-2 text-xs bg-zinc-900 border border-zinc-700 px-4 py-2 rounded-2xl">
+                    <i class="fa-solid fa-info-circle"></i>
+                    <span>Full tokenomics &amp; contract will be verified on launch day at Kumbaya.xyz</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ROADMAP -->
+    <section id="roadmap" class="max-w-5xl mx-auto px-6 py-24">
+        <div class="text-center mb-16">
+            <div class="uppercase tracking-[3px] text-xs font-mono text-orange-400 mb-3">CHAPTER 03 • THE MISSION</div>
+            <h2 class="section-header">The Ape Roadmap</h2>
+            <p class="mt-3 text-xl text-zinc-400">No promises. Only chaos and gains.</p>
+        </div>
+
+        <div class="max-w-2xl mx-auto space-y-6">
+            <!-- Phase 1 -->
+            <div class="timeline-item flex gap-x-6">
+                <div class="flex-shrink-0 w-16 h-16 rounded-2xl bg-orange-500 flex items-center justify-center text-3xl shadow-lg shadow-orange-500/40">1</div>
+                <div class="pt-1 flex-1">
+                    <div class="font-bold text-xl mb-1 flex items-center gap-x-2">LAUNCH ON KUMBAYA</div>
+                    <div class="text-zinc-400">Deploy $APEG with full liquidity. First 1,000 apes get OG role + special NFT airdrop.</div>
+                    <div class="mt-3 text-xs inline-block bg-emerald-900/60 text-emerald-400 px-3 py-1 rounded">LIVE • Q2 2026</div>
+                </div>
+            </div>
+            
+            <!-- Phase 2 -->
+            <div class="timeline-item flex gap-x-6">
+                <div class="flex-shrink-0 w-16 h-16 rounded-2xl bg-zinc-800 border border-zinc-700 flex items-center justify-center text-3xl">2</div>
+                <div class="pt-1 flex-1">
+                    <div class="font-bold text-xl mb-1">CULT ACTIVATION</div>
+                    <div class="text-zinc-400">Daily X raids • Meme contests • 24/7 voice chats. The angriest community wins.</div>
+                </div>
+            </div>
+            
+            <!-- Phase 3 -->
+            <div class="timeline-item flex gap-x-6">
+                <div class="flex-shrink-0 w-16 h-16 rounded-2xl bg-zinc-800 border border-zinc-700 flex items-center justify-center text-3xl">3</div>
+                <div class="pt-1 flex-1">
+                    <div class="font-bold text-xl mb-1">DEXSCREENER &amp; TRENDING</div>
+                    <div class="text-zinc-400">Hit #1 trending on Dexscreener. Volume explosion. The pixel gorilla goes viral.</div>
+                </div>
+            </div>
+            
+            <!-- Phase 4 -->
+            <div class="timeline-item flex gap-x-6">
+                <div class="flex-shrink-0 w-16 h-16 rounded-2xl bg-zinc-800 border border-zinc-700 flex items-center justify-center text-3xl">4</div>
+                <div class="pt-1 flex-1">
+                    <div class="font-bold text-xl mb-1">CEX LISTINGS &amp; BEYOND</div>
+                    <div class="text-zinc-400">Major centralized exchanges. Merch drop. Real-world ape meetups. The legend expands.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HOW TO BUY -->
+    <section id="buy" class="bg-zinc-900 border-y border-zinc-800 py-20">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="text-center mb-12">
+                <div class="uppercase tracking-[3px] text-xs font-mono text-orange-400 mb-3">CHAPTER 04 • THE RITUAL</div>
+                <h2 class="section-header mb-4">How to Ape Into APEG</h2>
+                <p class="text-xl text-zinc-400">4 easy steps to join the pixel cult on the fastest chain alive.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-5">
+                <div class="bg-zinc-950 border border-zinc-700 rounded-3xl p-7 meme-card">
+                    <div class="flex items-start gap-x-4">
+                        <div class="text-4xl font-black text-orange-400/80">01</div>
+                        <div class="flex-1">
+                            <div class="font-bold text-lg mb-2">Add MegaETH Network</div>
+                            <div class="text-sm text-zinc-400">Add the network in MetaMask / Rabby using official details from <a href="https://docs.megaeth.com" target="_blank" class="text-orange-400 underline">docs.megaeth.com</a></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-zinc-950 border border-zinc-700 rounded-3xl p-7 meme-card">
+                    <div class="flex items-start gap-x-4">
+                        <div class="text-4xl font-black text-orange-400/80">02</div>
+                        <div class="flex-1">
+                            <div class="font-bold text-lg mb-2">Bridge Funds to MegaETH</div>
+                            <div class="text-sm text-zinc-400">Bridge ETH, USDM or other assets. Use official MegaETH bridge or any supported bridge. Fees are tiny.</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-zinc-950 border border-zinc-700 rounded-3xl p-7 meme-card">
+                    <div class="flex items-start gap-x-4">
+                        <div class="text-4xl font-black text-orange-400/80">03</div>
+                        <div class="flex-1">
+                            <div class="font-bold text-lg mb-2">Go to Kumbaya.xyz</div>
+                            <div class="text-sm text-zinc-400">Connect your wallet → Search for <span class="font-mono text-orange-400">$APEG</span> → Swap instantly. Liquidity is deep and fast.</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-zinc-950 border border-zinc-700 rounded-3xl p-7 meme-card relative overflow-hidden">
+                    <div class="flex items-start gap-x-4">
+                        <div class="text-4xl font-black text-orange-400/80">04</div>
+                        <div class="flex-1">
+                            <div class="font-bold text-lg mb-2">HODL &amp; RAGE</div>
+                            <div class="text-sm text-zinc-400">Post your bags. Tag <span class="font-semibold">@apegmascot</span>. Watch the pixel gorilla moon on the real-time chain.</div>
+                        </div>
+                    </div>
+                    <div class="absolute -bottom-6 -right-6 text-[120px] opacity-10">🦍</div>
+                </div>
+            </div>
+            
+            <div class="mt-8 text-center">
+                <a href="https://kumbaya.xyz" target="_blank" 
+                   class="inline-flex items-center gap-x-3 px-8 py-3.5 bg-white hover:bg-orange-500 hover:text-white text-zinc-950 font-bold rounded-3xl transition-all text-sm active:scale-95">
+                    <span>OPEN KUMBAYA &amp; APE NOW</span>
+                    <i class="fa-solid fa-external-link-alt"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="py-20 border-b border-zinc-800">
+        <div class="max-w-md mx-auto px-6 text-center">
+            <div class="mx-auto w-24 h-24 mb-8">
+                <img src="https://i.imgur.com/ENrVyaP.jpg" alt="APEG" class="w-full h-full pixel-art rounded-2xl">
+            </div>
+            
+            <h2 class="text-5xl font-black tracking-tighter mb-4">Ready to<br>rage with us?</h2>
+            <p class="text-xl text-zinc-400 mb-9">The pixel ape is waiting.<br>Don't miss the fastest memecoin launch on MegaETH.</p>
+            
+            <div class="flex flex-col gap-y-3">
+                <a href="https://kumbaya.xyz" target="_blank"
+                   class="px-10 py-4 bg-gradient-to-r from-orange-500 to-orange-600 hover:brightness-110 font-bold text-lg rounded-3xl flex items-center justify-center gap-x-3 transition shadow-xl shadow-orange-600/40">
+                    🦍 LAUNCH / SWAP ON KUMBAYA
+                </a>
+                
+                <a href="https://x.com/apegmascot" target="_blank"
+                   class="px-10 py-4 border border-zinc-700 hover:bg-zinc-900 font-bold text-lg rounded-3xl flex items-center justify-center gap-x-3 transition">
+                    <i class="fa-brands fa-x-twitter mr-2"></i> FOLLOW @apegmascot
+                </a>
+            </div>
+            
+            <p class="mt-8 text-xs text-zinc-500">This is not financial advice. Memecoins are extremely volatile. DYOR. Ape responsibly.</p>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-black py-12 text-xs text-zinc-500">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-y-6">
+            <div>
+                © 2026 APEG CULT • ALL RIGHTS RESERVED (or not, it's a memecoin)
+            </div>
+            <div class="flex items-center gap-x-6">
+                <a href="https://kumbaya.xyz" target="_blank" class="hover:text-white transition">Kumbaya.xyz</a>
+                <a href="https://megaeth.com" target="_blank" class="hover:text-white transition">MegaETH</a>
+                <a href="https://x.com/apegmascot" target="_blank" class="hover:text-white transition">@apegmascot</a>
+            </div>
+            <div>
+                Built with ❤️ for the fastest apes in crypto
+            </div>
+        </div>
+    </footer>
+
+    <!-- Wallet modal removed as per request -->
+
+    <script>
+        // Tailwind script
+        function initializeTailwind() {
+            document.documentElement.style.setProperty('--accent', '#ff6b00');
+        }
+        
+        // Mobile menu
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+        
+        // Simple confetti
+        function launchConfetti() {
+            const colors = ['#ff6b00', '#f97316', '#fb923c', '#fed7aa'];
+            const container = document.createElement('div');
+            container.style.position = 'fixed';
+            container.style.top = '0';
+            container.style.left = '0';
+            container.style.width = '100%';
+            container.style.height = '100%';
+            container.style.pointerEvents = 'none';
+            container.style.zIndex = '9999';
+            document.body.appendChild(container);
+            
+            for (let i = 0; i < 80; i++) {
+                const particle = document.createElement('div');
+                particle.style.position = 'absolute';
+                particle.style.width = '8px';
+                particle.style.height = '8px';
+                particle.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+                particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.left = Math.random() * 100 + 'vw';
+                particle.style.top = '-20px';
+                particle.style.opacity = Math.random() * 0.9 + 0.3;
+                particle.style.transform = `rotate(${Math.random()*360}deg)`;
+                
+                const duration = Math.random() * 2.5 + 2.8;
+                particle.style.transition = `transform ${duration}s linear, opacity ${duration}s ease-out`;
+                
+                container.appendChild(particle);
+                
+                setTimeout(() => {
+                    particle.style.transform = `translateY(${window.innerHeight + 100}px) rotate(${Math.random()*800 - 200}deg)`;
+                    particle.style.opacity = '0';
+                    
+                    setTimeout(() => {
+                        particle.remove();
+                        if (container.children.length === 0) container.remove();
+                    }, duration * 1000);
+                }, 50);
+            }
+        }
+        
+        // Smooth scroll for nav links
+        function setupSmoothScroll() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        e.preventDefault();
+                        const navHeight = 80;
+                        const elementPosition = target.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.scrollY - navHeight;
+                        
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Close mobile menu if open
+                        const mobileMenu = document.getElementById('mobile-menu');
+                        if (!mobileMenu.classList.contains('hidden')) {
+                            mobileMenu.classList.add('hidden');
+                        }
+                    }
+                });
+            });
+        }
+        
+        // Logo hover effect
+        function setupLogoEffects() {
+            const logos = document.querySelectorAll('img[alt*="APEG"], img[alt*="Logo"]');
+            logos.forEach(logo => {
+                logo.addEventListener('mouseenter', () => {
+                    logo.style.transform = 'scale(1.08) rotate(3deg)';
+                    logo.style.transition = 'transform 0.4s cubic-bezier(0.23, 1.0, 0.32, 1)';
+                });
+                logo.addEventListener('mouseleave', () => {
+                    logo.style.transform = 'scale(1) rotate(0deg)';
+                });
+            });
+        }
+        
+        // Keyboard easter egg - press "A" for ape
+        function setupEasterEgg() {
+            let pressCount = 0;
+            document.addEventListener('keydown', function(e) {
+                if (e.key.toLowerCase() === 'a') {
+                    pressCount++;
+                    if (pressCount >= 5) {
+                        launchConfetti();
+                        const hero = document.querySelector('header');
+                        if (hero) hero.style.boxShadow = '0 0 120px rgba(255,107,0,0.6)';
+                        setTimeout(() => {
+                            if (hero) hero.style.boxShadow = 'none';
+                        }, 1200);
+                        pressCount = 0;
+                    }
+                }
+            });
+            
+            // Click logo 5 times for confetti
+            let clickCount = 0;
+            const mainLogo = document.querySelector('header img');
+            if (mainLogo) {
+                mainLogo.addEventListener('click', () => {
+                    clickCount++;
+                    if (clickCount >= 5) {
+                        launchConfetti();
+                        clickCount = 0;
+                    }
+                });
+            }
+        }
+        
+        // Initialize everything
+        function init() {
+            initializeTailwind();
+            setupSmoothScroll();
+            setupLogoEffects();
+            setupEasterEgg();
+            
+            // Random subtle animation on stats
+            setTimeout(() => {
+                const stats = document.querySelectorAll('.bg-zinc-950.px-6.py-4');
+                stats.forEach((stat, i) => {
+                    setTimeout(() => {
+                        stat.style.transition = 'all 0.4s ease';
+                        stat.style.transform = 'translateY(-2px)';
+                        setTimeout(() => {
+                            stat.style.transform = 'translateY(0)';
+                        }, 400);
+                    }, i * 120);
+                });
+            }, 1500);
+            
+            // Console message for degens
+            console.log('%c[APEG] Welcome to the cult, degen. Press "A" 5 times for a surprise 🦍', 'color:#ff6b00; font-family:monospace');
+        }
+        
+        window.onload = init;
+    </script>
+</body>
+</html>
